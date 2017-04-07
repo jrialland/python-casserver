@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cas:serviceResponse xmlns:cas="http://yale.edu/tp/cas">
+%if dic['valid']
+    <cas:authenticationSuccess>
+        <cas:user>{{dic['username']}}</cas:user>
+        <cas:attributes/>
+
+    %if dic['pgtiou']
+        <cas:proxyGrantingTicket>{{dic['pgtiou']}}</cas:proxyGrantingTicket>
+    %end
+    
+    %if len(dic['proxies']) > 0
+        <cas:proxies>
+            %for proxy in dic['proxies']
+                <cas:proxy>{{proxy}}</cas:proxy>
+            %end
+        </cas:proxies>
+    %end
+    
+    </cas:authenticationSuccess>
+%else
+    <cas:authenticationFailure/>
+%end
+</cas:serviceResponse>

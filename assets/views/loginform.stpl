@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+    <head>  
+        <link rel="stylesheet" type="text/css" href="static/screen.css"></link>
+    </head>
+
+    <body>
+    
+        <form method="post" action="login">
+        
+            <input type="text" name="username"></input>
+            
+            <input type="password" name="password"></input>
+        
+            <input type="hidden" name="lt" value="{{lt}}"></input>
+        
+            <input type="submit"></input>
+        
+        
+        </form>
+    
+    
+
+{{error_message if defined('error_message') else ''}}
+
+
+    
+    </body>
+
+
+</html>

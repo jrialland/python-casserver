@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cas:serviceResponse xml:cas="http://www.yale.edu/tp/cas">
+%if valid
+    <cas:proxySuccess>
+        <cas:proxyTicket>{{pt}}</cas:proxyTicket>
+    </cas:proxySuccess>
+%else
+    <cas:proxyFailure/>
+%end
+</cas:serviceResponse>
