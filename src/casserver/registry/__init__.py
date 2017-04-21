@@ -1,46 +1,57 @@
+# -*- coding:utf-8 -*-
 from abc import ABCMeta, abstractmethod
+
 
 class Ticket:
     pass
 
+
 class LoginTicket(Ticket):
     __slots__ = ('lt')
+
     def __init__(self, lt):
         self.lt = lt
 
+
 class TicketGrantingTicket(Ticket):
     __slots__ = ('tgt', 'username')
+
     def __init__(self, tgt, username):
         self.tgt = tgt
         self.username = username
 
+
 class ServiceTicket(Ticket):
     __slots = ('st', 'username', 'service', 'tgt')
+
     def __init__(self, st, username, service, tgt=None):
         self.st = st
         self.username = username
+        self.service = service
         self.tgt = tgt
+
 
 class TicketRegistry:
     __metaclass__ = ABCMeta
     __slots__ = ('loginTicketTtl')
+
     def __init__(self, loginTicketTtl):
         self.loginTicketTtl = loginTicketTtl
-        
+
     @abstractmethod
     def new_login_ticket(self):
         """ generates a new LoginTicket and it in the persistent storage
             @return LoginTicket
         """
         raise NotImplementedError
-    
+
     @abstractmethod
     def validate_login_ticket(self, lt):
         """ Verifies that the passed login ticket id is valid
             @return True or False
         """
         raise NotImplementedError
-        
+
     @abstractmethod
     def new_ticket_granting_ticket(self, username):
         """ Create a new TicketGrantingTicket for an user.
@@ -49,10 +60,10 @@ class TicketRegistry:
         raise NotImplementedError
 
     @abstractmethod
-    def validate_ticket_granting_ticket(self, ticket):
-        #shall return and object with a 'tgc' field and a 'username' field
+    def get_ticket_granting_ticket(self, ticket):
+        # shall return and object with a 'tgc' field and a 'username' field
         pass
-    
+
     @abstractmethod
     def delete_ticket_granting_ticket(self, tgt):
         """ Deletes a Tgt. the argument is the tgt id.
@@ -73,16 +84,15 @@ class TicketRegistry:
     @abstractmethod
     def delete_proxy_granting_tickets_for_username(self, username):
         raise NotImplementedError
-    
+
     @abstractmethod
     def new_proxy_granting_ticket(self, st, username):
         raise NotImplementedError
-    
+
     @abstractmethod
     def new_proxy_ticket(self, pgt, target):
         raise NotImplementedError
-    
+
     @abstractmethod
     def validate_proxy_ticket(self, service, pt):
         raise NotImplementedError
-

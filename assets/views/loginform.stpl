@@ -8,18 +8,12 @@
     <body>
     
         <form method="post" action="login">
-        
-            <input type="text" name="username"></input>
-            
+            <input type="text" name="username" value="{{username if defined('username') else ''}}"></input>
             <input type="password" name="password"></input>
-        
             <input type="hidden" name="lt" value="{{lt}}"></input>
-        
+            <input type="hidden" name="service" value="{{service if defined('service') else ''}}"></input>
             <input type="submit"></input>
-        
-        
         </form>
-    
     
 
 {{error_message if defined('error_message') else ''}}

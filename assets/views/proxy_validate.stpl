@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cas:serviceResponse xmlns:cas="http://yale.edu/tp/cas">
-%if dic['valid']
+%if valid
     <cas:authenticationSuccess>
-        <cas:user>{{dic['username']}}</cas:user>
+        <cas:user>{{username}}</cas:user>
         <cas:attributes/>
 
     %if dic['pgtiou']
